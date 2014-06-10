@@ -1,5 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
+import time
 
 class Mandlebrot:
     def __init__(self,height=1000,width=1000):
@@ -38,5 +39,7 @@ class Mandlebrot:
         plt.show()
 
 m = Mandlebrot()
+begin = time.time()
 m.calculate(iterations=100)
+print "Total time: " + str(time.time()-begin)
 m.show()
