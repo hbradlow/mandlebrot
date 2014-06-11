@@ -2,6 +2,7 @@ import pyopencl as cl
 import numpy
 from matplotlib import pyplot as plt
 import time
+import Tkinter
 
 class CL:
     def __init__(self):
@@ -45,5 +46,14 @@ begin = time.time()
 res = m.execute()
 print "Total time: " + str(time.time()-begin)
 
-plt.imshow(res, interpolation='nearest')
+fig, ax = plt.subplots()
+ax.imshow(res, interpolation='nearest')
+
+def onclick(event):
+    print 'button=%d, x=%d, y=%d, xdata=%f, ydata=%f'%(
+        event.button, event.x, event.y, event.xdata, event.ydata)
+
+cid = fig.canvas.mpl_connect('button_press_event', onclick)
+cid = fig.canvas.mpl_connect('button_release_event', onclick)
+
 plt.show()

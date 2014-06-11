@@ -4,6 +4,8 @@ __kernel void mandlebrot(__global float* width,
 {
     unsigned int index = get_global_id(0);
 
+    unsigned int num_iterations = 100;
+
     unsigned int i = index%((int)width[0]);
     unsigned int j = index/((int)width[0]);
     
@@ -15,7 +17,7 @@ __kernel void mandlebrot(__global float* width,
     float xtemp = 0;
 
 
-    for(int iterations = 0; iterations < 100; iterations ++){
+    for(int iterations = 0; iterations < num_iterations; iterations ++){
         if(zx*zx + zy*zy > 2*2){
             c[index] = iterations;
             return;
@@ -26,5 +28,5 @@ __kernel void mandlebrot(__global float* width,
         zx = xtemp;
     }
 
-    c[index] = 0;
+    c[index] = num_iterations;
 }
